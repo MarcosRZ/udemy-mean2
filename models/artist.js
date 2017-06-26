@@ -6,7 +6,7 @@ var Schema = mongoose.Schema;
 
 var ArtistSchema = Schema({
     name: String,
-    surname: String,
+    description: String,
     image: String
 })
 
