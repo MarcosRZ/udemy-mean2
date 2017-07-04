@@ -1,2 +1,4 @@
-node_modules
-uploads
+api/node_modules
+api/uploads
+client/node_modules
+client/bower_components

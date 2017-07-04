@@ -1,0 +1,70 @@
+html, body{
+    background: #eee;
+    margin:0px;
+    height: 100%;
+}
+
+.head-title{
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 25px;
+    display: block;
+}
+
+.navigation{
+    text-align: center;
+    color:white;
+    background-color: #1c1c1f;
+    height: 100%;
+}
+
+.navigation a{
+    text-decoration: none;
+    color:#ddd;
+    margin-top: 20px;
+    margin-bottom:20px;
+    display: block;
+}
+
+.navigation a:hover{
+    text-decoration: none;
+    color:white;
+    margin-top: 20px;
+    margin-bottom:20px;
+    display: block;
+}
+
+.navigation .glyphicon{
+    font-size: 25px;
+    display: block;
+    width:100%;
+}
+
+.user-image img, .image-for-edit img{
+    height: 50px;
+    width: 50px;
+    background: #eee;
+    border-radius: 100%;
+    margin: 0px auto;
+    margin-top: 15px;
+    overflow: hidden;
+}
+
+#user-logged{
+   background-color: #1c1c1f;
+   position: absolute;
+   bottom:0px;
+   border-top:1px solid #444;
+   width:75%;
+   cursor: pointer;
+}
+
+.activated{
+    border-bottom: 4px solid #84bd00;
+}
+
+.artist-image-edit img{
+    width: 150px;
+}
+
