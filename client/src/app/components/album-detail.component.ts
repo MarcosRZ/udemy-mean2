@@ -126,7 +126,21 @@ export class AlbumDetailComponent implements OnInit{
         this.itemId = null;
     }
 
+    play(song){
 
+        let jsonSong = JSON.stringify(song);
+        let filePath = this.url + '/get-song-file/' + song.file;
+        let imagePath = this.url + '/get-image-album/' + song.album.image;
+
+        localStorage.setItem('playing', jsonSong);
+
+        document.getElementById('mp3-source').setAttribute("src", filePath);
+        document.getElementById('play-song-title').innerHTML = song.name;
+        document.getElementById('play-song-artist').innerHTML = song.album.artist.name;
+        document.getElementById('player-image-album').setAttribute('src',imagePath);
+        (document.getElementById('player') as any).load();
+        (document.getElementById('player') as any).play();
+    }
 
 
     // onDeleteConfirm(id){
