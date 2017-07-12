@@ -18,6 +18,8 @@ import { SongDetailComponent } from './components/song-detail.component';
 import { SongEditComponent } from './components/song-edit.component';
 import { routing, appRoutingProviders } from './app.routing';
 
+import { Ng2Bs3ModalModule } from 'ng2-bs3-modal/ng2-bs3-modal';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,7 +40,8 @@ import { routing, appRoutingProviders } from './app.routing';
     BrowserModule,
     FormsModule,
     HttpModule,
-    routing
+    routing,
+    Ng2Bs3ModalModule
   ],
   providers: [appRoutingProviders],
   bootstrap: [AppComponent]

@@ -128,7 +128,7 @@ function deleteSong (req, res) {
             if (!removed){
                 res.status(404).send({message: 'No se ha borrado la cancion'});
             } else {
-                res.status(200).send({removed});
+                res.status(200).send({song: removed});
             }
         }
     })

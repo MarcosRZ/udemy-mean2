@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
+
+import { ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
 
 import { UserService } from '../services/user.service';
 import { AlbumService } from '../services/album.service';
@@ -17,6 +19,10 @@ import { Song } from '../models/song';
 })
 
 export class AlbumDetailComponent implements OnInit{
+
+    @ViewChild('modal')
+    deleteModal: ModalComponent;
+    public itemId: string;
 
     public album: Album;
     public songs: Song[];
@@ -83,6 +89,45 @@ export class AlbumDetailComponent implements OnInit{
             )
         })
     }
+
+
+    showDeleteModal(itemId){
+
+        this.itemId = itemId;
+
+        this.deleteModal.open()
+    }
+
+    onDeleteConfirm(){
+        this._songService.deleteSong(this.token, this.itemId)
+        .subscribe(
+            response => {
+                if (!response.song){
+                    console.log('Error desconocido borrando la cancion')
+                } else {
+                    console.log('DELETE')
+                    this.getAlbum();
+                    this.deleteModal.close();
+                }
+            },
+            error => {
+                if (error != null){
+                    //this.alertMessage = JSON.parse(error._body).message;
+                    console.log(error)
+                } else {
+                    console.log('Error desconocido al borrar la cancion');
+                    
+                }     
+            }
+        )  
+    }
+
+    onDeleteCancel(){
+        this.itemId = null;
+    }
+
+
+
 
     // onDeleteConfirm(id){
     //      this._albumService.deleteAlbum(this.token, id)
