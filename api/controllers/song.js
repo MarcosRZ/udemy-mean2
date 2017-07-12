@@ -45,7 +45,7 @@ function saveSong(req, res){
             if (!stored){
                 res.status(404).send({message: 'No se ha guardado la cancion'})
             } else {
-                res.status(200).send({stored: stored})
+                res.status(200).send({song: stored})
             }
         }
     })
@@ -111,7 +111,7 @@ function updateSong (req, res){
             if (!updated){
                 res.status(404).send({message: 'No se ha actualizado la cancion'});
             } else {
-                res.status(200).send({updated});
+                res.status(200).send({song: updated});
             }
         }
     })
@@ -140,7 +140,8 @@ function uploadFile(req, res){
     var file_name = 'No subido...';
         console.log(req.files)
     if (req.files){
-        var file_path = req.files.file.path;
+
+        var file_path = req.files.song.path;
         var path_split = file_path.split('\/');
         var file_name = path_split[2]
         var file_ext = file_name.split('.')[1];

@@ -1,0 +1,55 @@
+<div class="artist-box" *ngIf="artist">
+    
+    <div id="artist-head-card">
+
+        <div class="artist-image">
+            <img src="{{url + '/get-image-artist/' + artist.image}}" *ngIf="artist.image && artist.image != 'null'"/>
+        </div>
+
+        <h1>{{artist.name}}</h1>
+        <p class="description">{{artist.description}}</p>
+        <p><a [routerLink]="['/crear-album', artist._id]" class="btn btn-md btn-default">Añadir album</a></p>
+        <div class="buttons" *ngIf="identity.role == 'ROLE_ADMIN'">
+            <a class="btn btn-xs btn-warning" [routerLink]="['/editar-artista', artist._id]"><span class="glyphicon glyphicon-pencil"></span></a>
+            <a class="btn btn-xs btn-danger" (click)="onDeleteConfirm(artist._id)"><span class="glyphicon glyphicon-trash"></span></a>
+        </div>
+
+        <div class="confirmed" *ngIf="confirmDelete == true">
+            <a class="btn btn-xs btn-warning" (click)="onDeleteCancel()"><span class="glyphicon glyphicon-pencil"></span></a>
+            <a class="btn btn-xs btn-danger" (click)="onDeleteConfirm(artist._id)"><span class="glyphicon glyphicon-trash"></span></a>
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div id="gallery-albums" *ngIf="albums">
+        <ul class="album-list">
+            <li *ngFor="let album of albums" class="col-lg-4 album-list-item">
+                <div class="album-image">
+                    <img src="{{url + '/get-image-album/' + album.image}}" />
+                </div>
+                <div class="album-sub">
+                    <div class="album-name">
+                        <a [routerLink]="['/album', album._id]">{{album.title}}</a>
+                    </div>
+                    <div class="album-artist-link">
+                        <a [routerLink]="['/album', album.artist._id]">
+                            {{album.artist.name}}
+                        </a>
+                    </div>
+
+                    <div class="buttons" *ngIf="identity.role == 'ROLE_ADMIN'">
+                        <a class="btn btn-xs btn-warning" [routerLink]="['/editar-album', album._id]"><span class="glyphicon glyphicon-pencil"></span></a>
+                        <a class="btn btn-xs btn-danger" (click)="onDeleteAlbum(album._id)"><span class="glyphicon glyphicon-trash"></span></a>
+                    </div>
+
+                    <div class="confirm" *ngIf="confirmDelete == album._id">
+                        <a class="btn btn-xs btn-danger" (click)="onDeleteConfirm(album._id)">Eliminar</a>
+                        <a class="btn btn-xs btn-default" (click)="onDeleteCancel()">Cancelar</a>
+                    </div>
+             
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

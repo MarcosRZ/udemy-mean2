@@ -28,20 +28,29 @@ function getAlbum(req, res){
 }
 
 function getAlbums(req,res){
+    var artistId = req.params.artist;
     var page = req.params.page || 1;
     var itemsPerPage = 3;
 
-    Album.find().sort('name').paginate(page, itemsPerPage, (err, albums, total) => {
-        if (err){
+    if (!artistId){
+        // Return all albums
+        var find = Album.find({}).sort('title');
+    } else {
+        // Return albums for the given artist id
+        var find = Album.find({artist: artistId}).sort('year');
+    }
+
+    find.populate({path: 'artist'}).exec((err, albums) => {
+         if (err){
             res.status(500).send({message: 'Error recuperando albums'})
         } else {
             if (!albums){
                 res.status(404).send({message: 'No se han encontrado album'})
             } else {
-                res.status(200).send({total, page, albums})
+                res.status(200).send({albums})
             }
         }
-    })
+    });
 }
 
 function saveAlbum(req, res){
